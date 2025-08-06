@@ -4,648 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mes Projets - Arthur Carlier</title>
-    <style>
-        :root {
-            /* Couleurs identiques au portfolio principal */
-            --navy: #0a192f;
-            --light-navy: #112240;
-            --lightest-navy: #233554;
-            --slate: #8892b0;
-            --light-slate: #a8b2d1;
-            --lightest-slate: #ccd6f6;
-            --white: #e6f1ff;
-            --green: #64ffda;
-            --green-tint: rgba(100, 255, 218, 0.1);
-            --green-glow: rgba(100, 255, 218, 0.3);
-            
-            /* Ombres */
-            --shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
-            --shadow-large: 0 20px 60px -15px rgba(2, 12, 27, 0.8);
-            --glow-shadow: 0 0 20px rgba(100, 255, 218, 0.3);
-            
-            /* Polices */
-            --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', Consolas, 'Courier New', monospace;
-            --font-sans: 'Calibre', 'Inter', 'San Francisco', 'SF Pro Text', -apple-system, system-ui, sans-serif;
-            
-            /* Transitions */
-            --transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
-            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: var(--font-sans);
-            line-height: 1.3;
-            color: var(--slate);
-            background-color: var(--navy);
-            overflow-x: hidden;
-        }
-
-        /* Fond animé */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 20% 80%, rgba(100, 255, 218, 0.05) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgba(100, 255, 218, 0.05) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: 0;
-            animation: gradientShift 8s ease-in-out infinite alternate;
-        }
-
-        @keyframes gradientShift {
-            0% { opacity: 0.3; }
-            100% { opacity: 0.7; }
-        }
-
-        ::selection {
-            background-color: var(--lightest-navy);
-            color: var(--lightest-slate);
-        }
-
-        /* Barre de progression du scroll */
-        .scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--green), #4fd1c7);
-            z-index: 10000;
-            transition: width 0.1s ease;
-            box-shadow: 0 0 10px rgba(100, 255, 218, 0.5);
-        }
-
-        /* Navigation */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            padding: 0 50px;
-            background: rgba(10, 25, 47, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(100, 255, 218, 0.1);
-            transition: var(--transition-smooth);
-            height: 80px;
-            display: flex;
-            align-items: center;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            max-width: 1600px;
-            margin: 0 auto;
-        }
-
-        .logo {
-            color: var(--green);
-            font-family: var(--font-mono);
-            font-size: 24px;
-            font-weight: 400;
-            text-decoration: none;
-            position: relative;
-            transition: var(--transition);
-        }
-
-        .logo::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
-            border: 2px solid var(--green);
-            border-radius: 8px;
-            opacity: 0;
-            transform: scale(0.8);
-            transition: var(--transition);
-        }
-
-        .logo:hover::before {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        .back-link {
-            color: var(--green);
-            font-family: var(--font-mono);
-            font-size: 14px;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: var(--transition);
-            padding: 8px 16px;
-            border: 1px solid transparent;
-            border-radius: 4px;
-        }
-
-        .back-link:hover {
-            color: var(--lightest-slate);
-            border-color: var(--green);
-            background: var(--green-tint);
-        }
-
-        /* Header de la page */
-        .page-header {
-            padding: 120px 0 80px;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .page-title {
-            font-size: clamp(40px, 8vw, 60px);
-            font-weight: 600;
-            color: var(--lightest-slate);
-            margin-bottom: 20px;
-            animation: fadeInUp 0.6s ease forwards;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        .page-subtitle {
-            font-size: 20px;
-            color: var(--slate);
-            max-width: 600px;
-            margin: 0 auto;
-            animation: fadeInUp 0.6s ease forwards 0.2s;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Filtres de projets */
-        .project-filters {
-            padding: 0 50px;
-            margin-bottom: 80px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .filters-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .filter-buttons {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-bottom: 40px;
-        }
-
-        .filter-btn {
-            background: transparent;
-            border: 1px solid var(--lightest-navy);
-            color: var(--slate);
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-family: var(--font-mono);
-            font-size: 12px;
-            cursor: pointer;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .filter-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(100, 255, 218, 0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .filter-btn:hover::before {
-            left: 100%;
-        }
-
-        .filter-btn:hover,
-        .filter-btn.active {
-            border-color: var(--green);
-            color: var(--green);
-            background: var(--green-tint);
-            box-shadow: var(--glow-shadow);
-        }
-
-        /* Grille de projets */
-        .projects-container {
-            padding: 0 50px 100px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .projects-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-        }
-
-        .project-card {
-            background: rgba(17, 34, 64, 0.8);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(100, 255, 218, 0.1);
-            border-radius: 12px;
-            padding: 30px;
-            transition: var(--transition);
-            opacity: 0;
-            transform: translateY(30px);
-            animation: slideInUp 0.6s ease forwards;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-card:nth-child(1) { animation-delay: 0.1s; }
-        .project-card:nth-child(2) { animation-delay: 0.2s; }
-        .project-card:nth-child(3) { animation-delay: 0.3s; }
-        .project-card:nth-child(4) { animation-delay: 0.4s; }
-        .project-card:nth-child(5) { animation-delay: 0.5s; }
-        .project-card:nth-child(6) { animation-delay: 0.6s; }
-        .project-card:nth-child(7) { animation-delay: 0.7s; }
-        .project-card:nth-child(8) { animation-delay: 0.8s; }
-        .project-card:nth-child(9) { animation-delay: 0.9s; }
-
-        @keyframes slideInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, var(--green), transparent, var(--green));
-            border-radius: 12px;
-            opacity: 0;
-            transition: var(--transition);
-            z-index: -1;
-        }
-
-        .project-card:hover::before {
-            opacity: 0.3;
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(100, 255, 218, 0.3);
-            box-shadow: var(--shadow-large), var(--glow-shadow);
-        }
-
-        .project-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 20px;
-        }
-
-        .project-type {
-            background: var(--green-tint);
-            color: var(--green);
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-family: var(--font-mono);
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .project-status {
-            font-family: var(--font-mono);
-            font-size: 11px;
-            padding: 4px 8px;
-            border-radius: 4px;
-            text-transform: uppercase;
-        }
-
-        .status-completed {
-            background: rgba(34, 197, 94, 0.1);
-            color: #22c55e;
-            border: 1px solid rgba(34, 197, 94, 0.2);
-        }
-
-        .status-in-progress {
-            background: rgba(251, 191, 36, 0.1);
-            color: #fbbf24;
-            border: 1px solid rgba(251, 191, 36, 0.2);
-        }
-
-        .status-planned {
-            background: rgba(156, 163, 175, 0.1);
-            color: #9ca3af;
-            border: 1px solid rgba(156, 163, 175, 0.2);
-        }
-
-        .project-icon {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            display: block;
-            filter: drop-shadow(0 0 10px rgba(100, 255, 218, 0.3));
-        }
-
-        .project-title {
-            color: var(--lightest-slate);
-            font-size: 22px;
-            font-weight: 600;
-            margin-bottom: 15px;
-            line-height: 1.2;
-        }
-
-        .project-description {
-            color: var(--slate);
-            font-size: 16px;
-            line-height: 1.6;
-            margin-bottom: 25px;
-        }
-
-        .project-highlights {
-            list-style: none;
-            margin-bottom: 25px;
-        }
-
-        .project-highlights li {
-            color: var(--light-slate);
-            font-size: 14px;
-            margin-bottom: 8px;
-            padding-left: 20px;
-            position: relative;
-        }
-
-        .project-highlights li::before {
-            content: '▸';
-            position: absolute;
-            left: 0;
-            color: var(--green);
-            font-size: 12px;
-        }
-
-        .project-tech {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 25px;
-        }
-
-        .tech-tag {
-            background: rgba(100, 255, 218, 0.05);
-            border: 1px solid rgba(100, 255, 218, 0.1);
-            color: var(--light-slate);
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-family: var(--font-mono);
-            font-size: 11px;
-            transition: var(--transition);
-        }
-
-        .tech-tag:hover {
-            background: rgba(100, 255, 218, 0.1);
-            border-color: rgba(100, 255, 218, 0.3);
-            color: var(--green);
-        }
-
-        .project-links {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .project-actions {
-            display: flex;
-            gap: 10px;
-        }
-
-        .project-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            color: var(--light-slate);
-            text-decoration: none;
-            border: 1px solid rgba(100, 255, 218, 0.1);
-            border-radius: 8px;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-link::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: var(--green-tint);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: var(--transition);
-            z-index: -1;
-        }
-
-        .project-link:hover::before {
-            width: 100%;
-            height: 100%;
-        }
-
-        .project-link:hover {
-            color: var(--green);
-            border-color: var(--green);
-            transform: translateY(-2px);
-        }
-
-        .project-date {
-            color: var(--light-slate);
-            font-family: var(--font-mono);
-            font-size: 12px;
-        }
-
-        /* Section statistiques des projets */
-        .projects-stats {
-            background: rgba(17, 34, 64, 0.5);
-            border: 1px solid rgba(100, 255, 218, 0.1);
-            border-radius: 12px;
-            padding: 30px;
-            margin: 50px auto;
-            max-width: 800px;
-            text-align: center;
-        }
-
-        .stats-title {
-            color: var(--lightest-slate);
-            font-size: 20px;
-            margin-bottom: 25px;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
-        }
-
-        .stat-item {
-            padding: 15px;
-        }
-
-        .stat-number {
-            font-size: 2rem;
-            font-weight: bold;
-            color: var(--green);
-            font-family: var(--font-mono);
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .stat-label {
-            color: var(--light-slate);
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        /* Footer simple */
-        .page-footer {
-            text-align: center;
-            padding: 50px;
-            border-top: 1px solid rgba(100, 255, 218, 0.1);
-            position: relative;
-            z-index: 1;
-        }
-
-        .footer-text {
-            color: var(--light-slate);
-            font-family: var(--font-mono);
-            font-size: 12px;
-        }
-
-        .footer-text a {
-            color: var(--green);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .footer-text a:hover {
-            color: var(--lightest-slate);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .navbar {
-                padding: 0 25px;
-            }
-
-            .project-filters,
-            .projects-container {
-                padding: 0 25px 50px;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .project-card {
-                padding: 25px;
-            }
-
-            .filter-buttons {
-                gap: 10px;
-            }
-
-            .filter-btn {
-                padding: 6px 15px;
-                font-size: 11px;
-            }
-
-            .page-title {
-                font-size: clamp(30px, 8vw, 45px);
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 480px) {
-            .projects-container {
-                padding: 0 15px 50px;
-            }
-
-            .project-filters {
-                padding: 0 15px;
-            }
-
-            .project-card {
-                padding: 20px;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animation de chargement */
-        .loading {
-            opacity: 0.5;
-            pointer-events: none;
-        }
-
-        /* Curseur personnalisé */
-        .cursor {
-            position: fixed;
-            width: 20px;
-            height: 20px;
-            background: var(--green);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            opacity: 0.6;
-            mix-blend-mode: difference;
-            transition: all 0.1s ease;
-            transform: translate(-50%, -50%);
-        }
-
-        @media (max-width: 768px) {
-            .cursor {
-                display: none;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 </head>
 <body>
     <!-- Barre de progression du scroll -->
@@ -657,8 +18,8 @@
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
-            <a href="/" class="logo">A</a>
-            <a href="./porfolio.html" class="back-link">
+            <a href="index.html" class="logo">A</a>
+            <a href="index.html" class="back-link">
                 ← Retour au portfolio
             </a>
         </div>
@@ -678,7 +39,7 @@
         <h2 class="stats-title">Portfolio en chiffres</h2>
         <div class="stats-grid">
             <div class="stat-item">
-                <span class="stat-number" data-target="3">0</span>
+                <span class="stat-number" data-target="4">0</span>
                 <span class="stat-label">Projets Total</span>
             </div>
             <div class="stat-item">
@@ -731,8 +92,6 @@
                     <li>Interface admin responsive</li>
                     <li>API REST pour mobile</li>
                 </ul>
-
-
                 <div class="project-tech">
                     <span class="tech-tag">Vue.js</span>
                     <span class="tech-tag">Vite</span>
@@ -743,7 +102,6 @@
                     <span class="tech-tag">Prisma ORM</span>
                     <span class="tech-tag">MariaDB</span>
                     <span class="tech-tag">Git/GitHub</span>
-
                 </div>
                 <div class="project-links">
                     <div class="project-actions">
@@ -754,7 +112,39 @@
                 </div>
             </div>
 
-            <!-- Projet 6: Site Vitrine Responsive -->
+            <!-- Projet 2: MatchIT -->
+            <div class="project-card" data-category="mobile">
+                <div class="project-header">
+                    <span class="project-type">Mobile App</span>
+                    <span class="project-status status-in-progress">En Cours</span>
+                </div>
+                <span class="project-icon">🎤</span>
+                <h3 class="project-title">MatchIT</h3>
+                <p class="project-description">
+                    Application mobile cross-platform développée avec Flutter pour mettre en relation des personnes souhaitant partager des activités (musée, cinéma, sport, etc.).
+                </p>
+                <ul class="project-highlights">
+                    <li>Système de matching intelligent</li>
+                    <li>Chat en temps réel</li>
+                    <li>Notifications push</li>
+                    <li>Interface intuitive</li>
+                </ul>
+                <div class="project-tech">
+                    <span class="tech-tag">Flutter</span>
+                    <span class="tech-tag">Dart</span>
+                    <span class="tech-tag">Firebase</span>
+                    <span class="tech-tag">Push Notifications</span>
+                </div>
+                <div class="project-links">
+                    <div class="project-actions">
+                        <a href="#" class="project-link" title="Voir le projet">🔗</a>
+                        <a href="https://github.com/Tartito" class="project-link" title="Code source">📁</a>
+                    </div>
+                    <span class="project-date">2024</span>
+                </div>
+            </div>
+
+            <!-- Projet 3: Site Vitrine -->
             <div class="project-card" data-category="web">
                 <div class="project-header">
                     <span class="project-type">Site Vitrine</span>
@@ -767,7 +157,9 @@
                 </p>
                 <ul class="project-highlights">
                     <li>Design responsive moderne</li>
-                
+                    <li>Optimisation SEO</li>
+                    <li>Formulaire de contact</li>
+                    <li>CMS simple</li>
                 </ul>
                 <div class="project-tech">
                     <span class="tech-tag">HTML5</span>
@@ -785,8 +177,7 @@
                 </div>
             </div>
 
-
-            <!-- Projet 9: Portfolio Personnel -->
+            <!-- Projet 4: Portfolio Personnel -->
             <div class="project-card" data-category="web">
                 <div class="project-header">
                     <span class="project-type">Portfolio</span>
@@ -812,328 +203,25 @@
                 </div>
                 <div class="project-links">
                     <div class="project-actions">
-                        <a href="/" class="project-link" title="Voir le portfolio">🔗</a>
+                        <a href="index.html" class="project-link" title="Voir le portfolio">🔗</a>
                         <a href="https://github.com/Tartito" class="project-link" title="Code source">📁</a>
                     </div>
                     <span class="project-date">2024</span>
                 </div>
             </div>
 
-
-            <!-- Projet 9: Portfolio Personnel -->
-            <div class="project-card" data-category="web">
-                <div class="project-header">
-                    <span class="project-type">MatchIT</span>
-                    <span class="project-status status-completed">En Cours</span>
-                </div>
-                <span class="project-icon"> 🎤 </span>
-                <h3 class="project-title">MatchIt</h3>
-                <p class="project-description">
-Application mobile cross-platform développée avec Flutter pour mettre en relation des personnes souhaitant partager des activités (musée, cinéma, sport, etc.). Fonctionne comme un système de matching, sans but romantique, pour lutter contre la solitude dans les loisirs                </p>
-                <ul class="project-highlights">
-                    <li>Design moderne et minimaliste</li>
-                    <li>Animations CSS/JS fluides</li>
-                </ul>
-                <div class="project-tech">
-                    <span class="tech-tag">Flutter</span>
-                    <span class="tech-tag">Dart</span>
-                    <span class="tech-tag">FireBase</span>
-                    <span class="tech-tag">Responsive</span>
-                    <span class="tech-tag">Push Notifications</span>
-                </div>
-                <div class="project-links">
-                    <div class="project-actions">
-                        <a href="/" class="project-link" title="Voir le portfolio">🔗</a>
-                        <a href="https://github.com/Tartito" class="project-link" title="Code source">📁</a>
-                    </div>
-                    <span class="project-date">2024</span>
-                </div>
-            </div>
-
-
+        </div>
     </section>
 
     <!-- Footer -->
     <footer class="page-footer">
         <div class="footer-text">
-            <p>Conçu et développé par <a href="/">Arthur Carlier</a></p>
+            <p>Conçu et développé par <a href="index.html">Arthur Carlier</a></p>
             <p>💡 Une idée de projet ? <a href="mailto:a.carlier2004@outlook.fr">Discutons-en !</a></p>
         </div>
     </footer>
 
-    <script>
-        // Variables globales
-        let mouseX = 0, mouseY = 0;
-
-        // Configuration du curseur
-        function setupCursor() {
-            const cursor = document.getElementById('cursor');
-            if (window.innerWidth <= 768) {
-                cursor.style.display = 'none';
-                return;
-            }
-
-            document.addEventListener('mousemove', (e) => {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-                cursor.style.left = mouseX + 'px';
-                cursor.style.top = mouseY + 'px';
-            });
-
-            // Effets hover
-            const interactiveElements = document.querySelectorAll('a, button, .project-card');
-            interactiveElements.forEach(el => {
-                el.addEventListener('mouseenter', () => {
-                    cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
-                    cursor.style.opacity = '0.8';
-                });
-                
-                el.addEventListener('mouseleave', () => {
-                    cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-                    cursor.style.opacity = '0.6';
-                });
-            });
-        }
-
-        // Barre de progression du scroll
-        function setupScrollProgress() {
-            const progressBar = document.getElementById('scroll-progress');
-            
-            window.addEventListener('scroll', () => {
-                const scrolled = window.scrollY;
-                const maxHeight = document.body.scrollHeight - window.innerHeight;
-                const progress = (scrolled / maxHeight) * 100;
-                progressBar.style.width = progress + '%';
-            });
-        }
-
-        // Animation des statistiques
-        function animateStats() {
-            const statNumbers = document.querySelectorAll('.stat-number');
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const target = parseInt(entry.target.getAttribute('data-target'));
-                        animateNumber(entry.target, target);
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.5 });
-
-            statNumbers.forEach(stat => {
-                observer.observe(stat);
-            });
-        }
-
-        function animateNumber(element, target) {
-            let current = 0;
-            const increment = target / 50;
-            const duration = 1500;
-            const stepTime = duration / 50;
-
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= target) {
-                    current = target;
-                    clearInterval(timer);
-                }
-                element.textContent = Math.floor(current);
-            }, stepTime);
-        }
-
-        // Système de filtrage des projets
-        function setupProjectFilters() {
-            const filterButtons = document.querySelectorAll('.filter-btn');
-            const projectCards = document.querySelectorAll('.project-card');
-            const projectsGrid = document.getElementById('projects-grid');
-
-            filterButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    // Retirer la classe active de tous les boutons
-                    filterButtons.forEach(btn => btn.classList.remove('active'));
-                    // Ajouter la classe active au bouton cliqué
-                    button.classList.add('active');
-
-                    const filterValue = button.getAttribute('data-filter');
-                    
-                    // Ajouter effet de chargement
-                    projectsGrid.classList.add('loading');
-                    
-                    setTimeout(() => {
-                        filterProjects(filterValue, projectCards);
-                        projectsGrid.classList.remove('loading');
-                    }, 300);
-                });
-            });
-        }
-
-        function filterProjects(filterValue, projectCards) {
-            projectCards.forEach((card, index) => {
-                const categories = card.getAttribute('data-category').split(' ');
-                
-                if (filterValue === 'all' || categories.includes(filterValue)) {
-                    card.style.display = 'block';
-                    card.style.opacity = '0';
-                    card.style.transform = 'translateY(30px)';
-                    
-                    // Animation d'apparition avec délai
-                    setTimeout(() => {
-                        card.style.opacity = '1';
-                        card.style.transform = 'translateY(0)';
-                    }, index * 100);
-                } else {
-                    card.style.opacity = '0';
-                    card.style.transform = 'translateY(-30px)';
-                    setTimeout(() => {
-                        card.style.display = 'none';
-                    }, 300);
-                }
-            });
-        }
-
-        // Effet de ripple sur les cartes
-        function setupRippleEffects() {
-            const projectCards = document.querySelectorAll('.project-card');
-            
-            projectCards.forEach(card => {
-                card.addEventListener('click', function(e) {
-                    const ripple = document.createElement('div');
-                    ripple.style.cssText = `
-                        position: absolute;
-                        border-radius: 50%;
-                        background: rgba(100, 255, 218, 0.3);
-                        transform: scale(0);
-                        animation: ripple-effect 0.6s linear;
-                        pointer-events: none;
-                    `;
-                    
-                    const rect = this.getBoundingClientRect();
-                    const size = Math.max(rect.width, rect.height);
-                    const x = e.clientX - rect.left - size / 2;
-                    const y = e.clientY - rect.top - size / 2;
-                    
-                    ripple.style.width = ripple.style.height = size + 'px';
-                    ripple.style.left = x + 'px';
-                    ripple.style.top = y + 'px';
-                    
-                    this.style.position = 'relative';
-                    this.appendChild(ripple);
-                    
-                    setTimeout(() => {
-                        ripple.remove();
-                    }, 600);
-                });
-            });
-        }
-
-        // Ajout des keyframes pour l'effet ripple
-        function addRippleStyles() {
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes ripple-effect {
-                    to {
-                        transform: scale(4);
-                        opacity: 0;
-                    }
-                }
-            `;
-            document.head.appendChild(style);
-        }
-
-        // Animations au scroll
-        function setupScrollAnimations() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            });
-
-            // Observer les cartes qui ne sont pas encore visibles
-            const cards = document.querySelectorAll('.project-card');
-            cards.forEach((card, index) => {
-                if (index > 8) { // Cartes au-delà de l'écran initial
-                    card.style.opacity = '0';
-                    card.style.transform = 'translateY(30px)';
-                    observer.observe(card);
-                }
-            });
-        }
-
-        // Gestion des liens externes
-        function setupExternalLinks() {
-            const externalLinks = document.querySelectorAll('a[href^="http"]');
-            externalLinks.forEach(link => {
-                if (!link.getAttribute('target')) {
-                    link.setAttribute('target', '_blank');
-                    link.setAttribute('rel', 'noopener noreferrer');
-                }
-            });
-        }
-
-        // Recherche en temps réel (optionnel)
-        function setupSearch() {
-            // Cette fonction pourrait être étendue pour ajouter une barre de recherche
-            const searchInput = document.getElementById('search-input');
-            if (searchInput) {
-                searchInput.addEventListener('input', (e) => {
-                    const searchTerm = e.target.value.toLowerCase();
-                    const projectCards = document.querySelectorAll('.project-card');
-                    
-                    projectCards.forEach(card => {
-                        const title = card.querySelector('.project-title').textContent.toLowerCase();
-                        const description = card.querySelector('.project-description').textContent.toLowerCase();
-                        const techs = Array.from(card.querySelectorAll('.tech-tag')).map(tag => tag.textContent.toLowerCase());
-                        
-                        const matches = title.includes(searchTerm) || 
-                                      description.includes(searchTerm) || 
-                                      techs.some(tech => tech.includes(searchTerm));
-                        
-                        card.style.display = matches ? 'block' : 'none';
-                    });
-                });
-            }
-        }
-
-        // Initialisation
-        document.addEventListener('DOMContentLoaded', () => {
-            setupCursor();
-            setupScrollProgress();
-            animateStats();
-            setupProjectFilters();
-            setupRippleEffects();
-            addRippleStyles();
-            setupScrollAnimations();
-            setupExternalLinks();
-            setupSearch();
-        });
-
-        // Performance et nettoyage
-        window.addEventListener('beforeunload', () => {
-            // Nettoyer les timers et observers
-            document.removeEventListener('mousemove', () => {});
-            window.removeEventListener('scroll', () => {});
-        });
-
-        // Console message
-        console.log(`
-        %c🚀 Page Projets - Arthur Carlier
-        %cTu explores mes créations ? Génial !
-        %cChaque projet raconte une histoire d'apprentissage et de passion pour le code.
-        %c
-        Envie de collaborer ? a.carlier2004@outlook.fr
-        `, 
-        'font-size: 16px; color: #64ffda; font-weight: bold;',
-        'font-size: 14px; color: #a8b2d1;',
-        'font-size: 14px; color: #a8b2d1;',
-        'font-size: 12px; color: #8892b0;'
-        );
-    </script>
+    <!-- JavaScript -->
+    <script src="script.js"></script>
 </body>
-
+</html>

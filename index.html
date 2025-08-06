@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arthur - Développeur Full Stack</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-text">A</div>
+    </div>
+
+    <!-- Barre de progression du scroll -->
+    <div class="scroll-progress" id="scroll-progress"></div>
+
+    <!-- Particules d'arrière-plan -->
+    <div class="bg-particles" id="bg-particles"></div>
+
+    <!-- Cursor custom -->
+    <div class="cursor" id="cursor"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="logo">A</a>
+            <ul class="nav-links">
+                <li><a href="#about">À propos</a></li>
+                <li><a href="#experience">Expérience</a></li>
+                <li><a href="#projects">Projets</a></li>
+                <li><a href="./projects.html">Tous les projets</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="/Cv Carlier Arthur.pdf" class="resume-button">CV</a>
+        </div>
+    </nav>
+
+    <!-- Liens sociaux fixes -->
+    <div class="fixed-social">
+        <ul>
+            <li style="--i: 1"><a href="https://github.com/Tartito" target="_blank" aria-label="GitHub">📂</a></li>
+            <li style="--i: 2"><a href="https://www.linkedin.com/in/arthur-carlier-003374250/" target="_blank" aria-label="LinkedIn">💼</a></li>
+        </ul>
+    </div>
+
+    <!-- Email fixe -->
+    <div class="fixed-email">
+        <a href="mailto:a.carlier2004@outlook.fr" class="email-link">a.carlier2004@outlook.fr</a>
+    </div>
+
+    <!-- Section Hero -->
+    <section id="hero" class="hero">
+        <div class="hero-intro">Salut, je suis</div>
+        <h1 class="hero-title">Arthur Carlier.</h1>
+        <h2 class="hero-subtitle">Je développe des solutions web innovantes.</h2>
+        <p class="hero-description">
+            Je suis un développeur full-stack de 21 ans, diplômé d'un BTS SIO SLAM et actuellement 
+            en Bac+3 en alternance au <a href="https://www.groupe-sos.org/">Groupe SOS</a> à Metz. 
+            Spécialisé en Symfony et Vue.js, je crée des applications web modernes et performantes 
+            tout en développant mon projet personnel MatchIT.
+        </p>
+        <div class="hero-button">
+            <a class="btn" href="#projects">Découvrir mes projets</a>
+        </div>
+    </section>
+
+    <!-- Section À propos -->
+    <section id="about" class="about section">
+        <h2 class="section-heading">À propos de moi</h2>
+        
+        <div class="about-inner">
+            <div class="about-text">
+                <div>
+                    <p>
+                        Salut ! Je m'appelle Arthur et j'ai découvert le développement en terminale avant 
+                        d'approfondir mes connaissances durant mon BTS SIO option SLAM, désormais terminé. 
+                        Ce qui n'était au départ qu'une curiosité est devenu un vrai plaisir!
+                    </p>
+                    <p>
+                        Aujourd'hui, je poursuis mes études en Bac+3 tout en étant en alternance au 
+                        <a href="https://www.groupe-sos.org/">Groupe SOS</a> à Metz, où je travaille sur des 
+                        projets à impact social. Cette expérience me permet d'allier technique et sens, 
+                        en développant des solutions qui améliorent concrètement la vie des utilisateurs du groupe.
+                    </p>
+                    <p>
+                        En parallèle, après avoir terminé le projet de fin d'année scolaire <a href="#projects">Cyna</a> avec mon équipe, 
+                        je me concentre désormais sur le développement de <a href="#projects">MatchIT</a>, 
+                        mon application mobile Flutter de matching.
+                    </p>
+                    <p>Voici les technologies avec lesquelles je travaille actuellement :</p>
+                </div>
+
+                <div class="skills-container">
+                    <ul class="skills-list" id="skills-list">
+                        <li>PHP & Symfony</li>
+                        <li>JavaScript & Vue.js</li>
+                        <li>Node.js & Angular</li>
+                        <li>Flutter & Dart</li>
+                        <li>C# & Java</li>
+                        <li>Python</li>
+                        <li>MySQL & MongoDB</li>
+                        <li>Bootstrap & CSS3</li>
+                        <!-- Skills cachées initialement -->
+                        <li class="hidden-skill">HTML5 & XML</li>
+                        <li class="hidden-skill">WinDev & WLanguage</li>
+                        <li class="hidden-skill">Git & GitHub/GitLab</li>
+                        <li class="hidden-skill">Visual Studio Code</li>
+                        <li class="hidden-skill">Android Studio</li>
+                        <li class="hidden-skill">HFSQL Database</li>
+                        <li class="hidden-skill">API REST</li>
+                        <li class="hidden-skill">Hyper-V & Packet Tracer</li>
+                    </ul>
+                    <button class="skills-toggle" id="skills-toggle" onclick="toggleSkills()">
+                        <span class="toggle-text">Voir plus</span>
+                        <span class="toggle-arrow">▶</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="about-pic">
+                <div class="wrapper">
+                    <img src="photo/Img_Arthur.png" alt="Photo d'Arthur" class="img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Expérience -->
+    <section id="experience" class="experience section">
+        <h2 class="section-heading">Où j'ai travaillé</h2>
+        
+        <div class="jobs-container">
+            <div class="job-tabs">
+                <button class="job-tab active" onclick="showJob(0)">Groupe SOS</button>
+            </div>
+
+            <div class="job-panel active" id="job-0">
+                <h3 class="job-title">
+                    Développeur Full Stack <span class="job-company">@ Groupe SOS</span>
+                </h3>
+                <p class="job-date">Septembre 2023 — Présent</p>
+                <ul class="job-details">
+                    <li>Développement de logiciels internes avec WinDev pour améliorer les processus liés à la gestion des certificats logiciels</li>
+                    <li>Participation à la création d'un gestionnaire de mots de passe sécurisé avec chiffrement, tableau dynamique et fiches de modification</li>
+                    <li>Contribution au recensement du matériel informatique des EHPAD avec développement d'un outil de suivi</li>
+                    <li>Collaboration avec un développeur sécurité pour intégrer des fonctions de protection et de traçabilité</li>
+                    <li>Travail en binôme sur plusieurs projets en mode agile, avec échanges réguliers sur les choix techniques</li>
+                    <li>Utilisation de WinDev et WebDev pour créer des interfaces intuitives et adaptées aux besoins des utilisateurs</li>
+                    <li>Rédaction de documentation technique et de supports pour la prise en main des applications</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Projets -->
+    <section id="projects" class="projects section">
+        <h2 class="section-heading">Quelques projets que j'ai créés</h2>
+
+        <div class="project">
+            <div class="project-content">
+                <div>
+                    <p class="project-overline">Projet Featured</p>
+                    <h3 class="project-title">
+                        <a href="https://github.com/Tartito/JohnCyna" target="_blank" rel="noopener noreferrer">Cyna - Solutions Informatiques</a>
+                    </h3>
+                    <div class="project-description">
+                        <p>
+                            Développement en équipe de CYNA, une plateforme e-commerce pour la vente de solutions informatiques. 
+                            Interface admin, gestion des stocks, devis personnalisés et espace client. 
+                            Projet full-stack mené à bien, illustrant mes compétences techniques et mon travail en équipe.
+                        </p>
+                    </div>
+                    <ul class="project-tech-list">
+                        <li>Vue.js</li>
+                        <li>Vite</li>
+                        <li>TypeScript</li>
+                        <li>BootstrapVue</li>
+                        <li>Node.js</li>
+                        <li>Koa.js</li>
+                        <li>Prisma ORM</li>
+                        <li>MariaDB</li>
+                        <li>Git/GitHub</li>
+                    </ul>
+                    <div class="project-links">
+                        <a href="#" aria-label="External Link">🔗</a>
+                        <a href="https://github.com/Tartito/MatchIt" aria-label="GitHub Link">📁</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-image">
+                <a href="https://github.com/Tartito/JohnCyna" target="_blank" rel="noopener noreferrer">
+                    <img src="photo/imageCyna.png" alt="Cyna Platform" class="project-img">
+                </a>
+            </div>
+        </div>
+
+        <div class="project">
+            <div class="project-content">
+                <div>
+                    <p class="project-overline">Projet Featured</p>
+                    <h3 class="project-title">
+                        <a href="#" target="_blank" rel="noopener noreferrer">MatchIT - App Mobile</a>
+                    </h3>
+                    <div class="project-description">
+                        <p>
+                            Application mobile cross-platform développée avec Flutter pour mettre en relation des personnes souhaitant partager des activités (musée, cinéma, sport, etc.). 
+                            Fonctionne comme un système de matching, sans but romantique, pour lutter contre la solitude dans les loisirs. 
+                            Inclut un algorithme de mise en relation, un chat en temps réel et un système de notifications. 
+                            Projet personnel principal en cours de développement.
+                        </p>
+                    </div>
+                    <ul class="project-tech-list">
+                        <li>Flutter</li>
+                        <li>Dart</li>
+                        <li>Firebase</li>
+                        <li>Push Notifications</li>
+                    </ul>
+                    <div class="project-links">
+                        <a href="#" aria-label="External Link">🔗</a>
+                        <a href="https://github.com/Tartito/MatchIt" aria-label="GitHub Link">📁</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-image">
+                <a href="#" target="_blank" rel="noopener noreferrer">
+                    <img src="photo/MatchIt.png" alt="MatchIT App" class="project-img">
+                </a>
+            </div>
+        </div>
+
+        <div class="project">
+            <div class="project-content">
+                <div>
+                    <p class="project-overline">Projet Featured</p>
+                    <h3 class="project-title">
+                        <a href="#" target="_blank" rel="noopener noreferrer">Portfolio Personnel</a>
+                    </h3>
+                    <div class="project-description">
+                        <p>
+                            Site portfolio personnel responsive développé from rien. Design moderne inspiré 
+                            des meilleures pratiques, animations fluides, optimisation SEO et performance. 
+                            Code source ouvert et documenté pour aider d'autres développeurs juniors.
+                        </p>
+                    </div>
+                    <ul class="project-tech-list">
+                        <li>HTML5</li>
+                        <li>CSS3/Sass</li>
+                        <li>JavaScript</li>
+                        <li>Responsive Design</li>
+                        <li>Git</li>
+                    </ul>
+                    <div class="project-links">
+                        <a href="#" aria-label="External Link">🔗</a>
+                        <a href="https://github.com/Tartito" aria-label="GitHub Link">📁</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-image">
+                <a href="#" target="_blank" rel="noopener noreferrer">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDYwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI2MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjMTEyMjQwIi8+CjxyZWN0IHg9IjUwIiB5PSI1MCIgd2lkdGg9IjUwMCIgaGVpZ2h0PSIzMDAiIGZpbGw9IiM2NGZmZGEiIHJ4PSI4IiBmaWxsLW9wYWNpdHk9IjAuMSIvPgo8cmVjdCB4PSI4MCIgeT0iMTAwIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjNjRmZmRhIiByeD0iOCIvPgo8cmVjdCB4PSI4MCIgeT0iMTYwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwIiBmaWxsPSIjYThiMmQxIiByeD0iNCIvPgo8cmVjdCB4PSI4MCIgeT0iMjAwIiB3aWR0aD0iMjUwIiBoZWlnaHQ9IjIwIiBmaWxsPSIjYThiMmQxIiByeD0iNCIvPgo8cmVjdCB4PSI4MCIgeT0iMjQwIiB3aWR0aD0iMzUwIiBoZWlnaHQ9IjIwIiBmaWxsPSIjYThiMmQxIiByeD0iNCIvPgo8Y2lyY2xlIGN4PSI0NTAiIGN5PSIxNTAiIHI9IjQwIiBmaWxsPSIjNjRmZmRhIiBmaWxsLW9wYWNpdHk9IjAuMyIvPgo8Y2lyY2xlIGN4PSI0NTAiIGN5PSIxNTAiIHI9IjIwIiBmaWxsPSIjNjRmZmRhIi8+Cjwvc3ZnPgo=" alt="Portfolio" class="project-img">
+                </a>
+            </div>
+        </div>
+
+        <!-- Bouton Voir Plus -->
+        <div class="view-more-projects">
+            <a href="./projects.html" class="view-more-btn">Voir tous mes projets</a>
+        </div>
+    </section>
+
+    <!-- Section Éducation -->
+    <section id="education" class="education-section section">
+        <h2 class="section-heading">Formation</h2>
+        
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-date">2024 - Présent</div>
+                <div class="timeline-title">Bac+3 Développeur Full stack</div>
+                <div class="timeline-subtitle">Mewo - Metz</div>
+                <div class="timeline-description">
+                    Formation en alternance avec le Groupe SOS. Spécialisation en développement web full-stack, 
+                    méthodologies agiles et gestion de projet.
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-date">2021 - 2023</div>
+                <div class="timeline-title">BTS SIO SLAM</div>
+                <div class="timeline-subtitle">Lycée Robert Schuman - Metz</div>
+                <div class="timeline-description">
+                    Services Informatiques aux Organisations, spécialité Solutions Logicielles et Applications Métiers. 
+                    Mention Bien. Projets en équipe, stage en entreprise.
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-date">2018 - 2021</div>
+                <div class="timeline-title">Bac STMG option sig</div>
+                <div class="timeline-subtitle">Lycée - Metz</div>
+                <div class="timeline-description">
+                    Première approche de la programmation.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Certifications -->
+    <section class="education-section section">
+        <h2 class="section-heading">Certifications & Formations</h2>
+        
+        <div class="certifications-grid">
+            <div class="certification-card">
+                <span class="cert-icon">🏆</span>
+                <div class="cert-title">Symfony Certified Developer</div>
+                <div class="cert-issuer">Symfony</div>
+                <div class="cert-date">En cours</div>
+            </div>
+            
+            <div class="certification-card">
+                <span class="cert-icon">⚡</span>
+                <div class="cert-title">JavaScript Algorithms</div>
+                <div class="cert-issuer">FreeCodeCamp</div>
+                <div class="cert-date">2023</div>
+            </div>
+            
+            <div class="certification-card">
+                <span class="cert-icon">🔐</span>
+                <div class="cert-title">MOOC </div>
+                <div class="cert-issuer">ANSSI</div>
+                <div class="cert-date">2022</div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Section Contact -->
+    <section id="contact" class="contact section">
+        <span class="overline">Et maintenant ?</span>
+        <h2 class="title">Travaillons ensemble</h2>
+        <p class="description">
+            Que ce soit pour un stage, une alternance, un projet freelance ou simplement pour échanger 
+            sur le développement, n'hésitez pas à me contacter ! Je suis toujours ouvert aux nouvelles 
+            opportunités et aux rencontres enrichissantes dans l'écosystème tech de Metz et Grand Est.
+        </p>
+        <div class="email-link">
+            <a class="btn" href="mailto:a.carlier2004@outlook.fr">Discutons ensemble !</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="copy">
+            <p>Conçu et développé par Arthur Carlier</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
